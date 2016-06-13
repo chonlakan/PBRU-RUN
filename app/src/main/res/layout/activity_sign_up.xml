@@ -17,7 +17,8 @@
         android:id="@+id/button3"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:textColor="#040404" />
+        android:textColor="#040404"
+        android:onClick="clickSignUpSign" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +30,7 @@
         android:layout_marginBottom="20dp"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
-        android:textColor="@android:color/background_dark" />
+        android:textColor="@color/abc_primary_text_disable_only_material_light" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -58,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editText3"
                 android:layout_weight="2"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="#000000" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editText4"
                 android:layout_weight="2"
-                android:inputType="number|text" />
+                android:inputType="text"
+                android:textColor="#000000" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +105,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editText5"
                 android:layout_weight="2"
-                android:inputType="number" />
+                android:textColor="#000000"
+                android:inputType="text" />
         </LinearLayout>
 
         <TextView
@@ -170,35 +174,43 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton"
                 android:layout_weight="1"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:textColor="#000000"
+                android:checked="true" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton2"
                 android:layout_weight="1"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="14dp"
+                android:textColor="#000000"
+                android:checked="false" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton3"
                 android:layout_weight="1"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="14dp"
+                android:textColor="#000000" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton4"
                 android:layout_weight="1"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:textColor="#000000" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton5"
                 android:layout_weight="1"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:textColor="#000000"
+                android:checked="false" />
         </RadioGroup>
 
     </LinearLayout>

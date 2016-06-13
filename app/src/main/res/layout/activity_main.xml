@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:text="@string/signIn"
             android:id="@+id/button"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="#010101" />
 
         <Button
             android:layout_width="wrap_content"
@@ -32,7 +33,8 @@
             android:text="@string/signUp"
             android:id="@+id/button2"
             android:layout_weight="1"
-            android:onClick="clickSignUpMain" />
+            android:onClick="clickSignUpMain"
+            android:textColor="#010101" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,21 +62,24 @@
             android:id="@+id/textView"
             android:layout_marginTop="15dp"
             android:textSize="@dimen/h1"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#010101" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:layout_marginTop="15dp"
-            android:hint="Username :" />
+            android:hint="Username :"
+            android:inputType="text" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText2"
             android:hint="Password :"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="4dp"
+            android:inputType="number|text" />
 
     </LinearLayout>
 </RelativeLayout>

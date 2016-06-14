@@ -184,8 +184,7 @@
                 android:id="@+id/radioButton2"
                 android:layout_weight="1"
                 android:layout_marginLeft="14dp"
-                android:textColor="#000000"
-                android:checked="false" />
+                android:textColor="#000000" />
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -209,8 +208,7 @@
                 android:id="@+id/radioButton5"
                 android:layout_weight="1"
                 android:layout_marginLeft="15dp"
-                android:textColor="#000000"
-                android:checked="false" />
+                android:textColor="#000000" />
         </RadioGroup>
 
     </LinearLayout>

@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         //Request SQLite เพื่อสร้าง SQLite Database
         myManage = new MyManage(this);
 
+
     }//Main method
 
 

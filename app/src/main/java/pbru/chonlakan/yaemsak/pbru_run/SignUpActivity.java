@@ -105,7 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
         Log.d("pbruV1", "name ==> " + nameString);
         Log.d("pbruV1", "user ==> " + userString);
         Log.d("pbruV1", "password ==> " + passwordString);
-        Log.d("pbruV1", "avata ==> " + Integer.toString(indexAnInt));
+        Log.d("pbruV1", "avatar ==> " + Integer.toString(indexAnInt));
 
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormEncodingBuilder()
@@ -134,8 +134,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });//Call
 
-
-
-    }   // upload
+    }   // uploadToServer
 
 }   // Main Class

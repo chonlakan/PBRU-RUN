@@ -5,6 +5,8 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -24,7 +35,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationManager locationManager;
     private Criteria criteria;
     private String[] userLoginStrings;
-
+    private MyData myData;
+    private static final String urlEditLocation = "http://swiftcodingthai.com/pbru3/edit_location.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +44,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
         userLoginStrings = getIntent().getStringArrayExtra("Login");
+
+
+        myData = new MyData();
 
         //Setup Location
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);//open service
@@ -46,6 +61,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }//Main method
+
+    private class ConnectedLocation extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... voids) {
+            return null;
+        }//doIn
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }//onPost
+    }//ConnectedLocation
 
     @Override
     protected void onResume() {//ทำหลังหยุดไป
@@ -121,10 +148,69 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //Center Location
+        LatLng latLng = new LatLng(myData.getLatADouble(),myData.getLngADouble());//ดึงจาก class MyData
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+
+        //Ç
+        createMyLoop();
+
+
     }//onMapReady
+
+    private void createMyLoop() {
+
+        editUserLocationToServer();
+
+        makeAllMarker();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               createMyLoop();
+
+            }
+        },3000);
+    }
+
+    private void makeAllMarker() {
+
+        mMap.clear();
+
+
+
+    }//markAllMarker
+
+    private void editUserLocationToServer() {
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormEncodingBuilder()
+                .add("isAdd", "true")
+                .add("id", userLoginStrings[0])
+                .add("Lat", Double.toString(userLatADouble))
+                .add("Lng", Double.toString(userLngADouble))
+                .build();
+
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(urlEditLocation).post(requestBody).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                    Log.d("pbruV6", "errorF ==>"+ e.toString());
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                try {
+
+                } catch (Exception e) {
+                    Log.d("pbruV6", "errorR ==>"+ e.toString());
+                }
+            }
+        });
+
+    }//editUserLocationToServer
 
 }//Main Class

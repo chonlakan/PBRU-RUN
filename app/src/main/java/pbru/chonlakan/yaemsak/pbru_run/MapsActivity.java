@@ -272,3 +272,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }//editUserLocationToServer
 
 }//Main Class
+

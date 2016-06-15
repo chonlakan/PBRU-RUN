@@ -74,19 +74,23 @@ public class MainActivity extends AppCompatActivity {
 
             if (passwordString.equals(resultStrings[3])) {
 
-                Toast.makeText(this,"Welcome " + resultStrings[1],Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                intent.putExtra("Login", resultStrings);
+                startActivity(intent);
+
+                Toast.makeText(this, "Welcome " + resultStrings[1], Toast.LENGTH_SHORT).show();
+
+                finish();
 
             } else {
                 Toast.makeText(this, "Password False", Toast.LENGTH_SHORT).show();
             }
-            
 
 
         } catch (Exception e) {
-            Toast.makeText(this,"ไม่มี " + userString + "ในฐานข้อมูล",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"ไม่มี " + userString+ " ในฐานข้อมูลของเรา",
+                    Toast.LENGTH_SHORT).show();
         }
-
-
     }//SearchMyUser
 
     private class ConnectedServer extends AsyncTask<Void, Void, String> {

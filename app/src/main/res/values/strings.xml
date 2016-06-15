@@ -2,4 +2,5 @@
     <string name="app_name">PBRU-RUN</string>
     <string name="signIn">Sign In</string>
     <string name="signUp">Sign Up</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

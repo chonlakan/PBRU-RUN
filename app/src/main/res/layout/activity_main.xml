@@ -79,7 +79,7 @@
             android:id="@+id/editText2"
             android:hint="Password :"
             android:layout_marginTop="4dp"
-            android:inputType="numberPassword|textPassword|text" />
+            android:inputType="textPassword" />
 
     </LinearLayout>
 </RelativeLayout>

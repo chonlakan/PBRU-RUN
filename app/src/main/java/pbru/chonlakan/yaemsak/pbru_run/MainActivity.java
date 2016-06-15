@@ -8,10 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,11 +25,23 @@ public class MainActivity extends AppCompatActivity {
     //Explicit
     private MyManage myManage;
     private static final String urlJSON = "http://swiftcodingthai.com/pbru3/get_user.php";
+    private EditText userEditText, passwordEditText;
+    private ImageView imageView;
+    private static final String urlLogo = "http://swiftcodingthai.com/pbru3/logo_pbru.png";
+    private String userString , passwordString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //BinWidget
+        userEditText = (EditText) findViewById(R.id.editText);
+        passwordEditText = (EditText) findViewById(R.id.editText2);
+        imageView = (ImageView) findViewById(R.id.imageView);
+
+        //Load Logo From Server
+        Picasso.with(this).load(urlLogo).resize(140,140).into(imageView);
 
         //Request SQLite เพื่อสร้าง SQLite Database
         myManage = new MyManage(this);
@@ -38,6 +54,40 @@ public class MainActivity extends AppCompatActivity {
 
 
     }//Main method
+
+    public void clickSignIn(View view) {
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
+        if (userString.equals("") || passwordString.equals("")) {
+            Toast.makeText(this, "มีช่องว่าง กรุณากรอกทุกช่อง", Toast.LENGTH_SHORT).show();
+        } else {
+            searchMyUser();
+        }
+
+    }//clickSignIn
+
+    private void searchMyUser() {
+
+        try {
+            String[] resultStrings = myManage.searchUser(userString);
+
+            if (passwordString.equals(resultStrings[3])) {
+
+                Toast.makeText(this,"Welcome " + resultStrings[1],Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(this, "Password False", Toast.LENGTH_SHORT).show();
+            }
+            
+
+
+        } catch (Exception e) {
+            Toast.makeText(this,"ไม่มี " + userString + "ในฐานข้อมูล",Toast.LENGTH_SHORT).show();
+        }
+
+
+    }//SearchMyUser
 
     private class ConnectedServer extends AsyncTask<Void, Void, String> {
         @Override
